@@ -22,6 +22,7 @@ public class StaticPublishCacheModule : IHttpModule
         HttpRequest Request = context.Request;
 
         if (!Request.Path.EndsWith(@"/")) return;
+        if (Request.Path.StartsWith("/umbraco", StringComparison.InvariantCultureIgnoreCase)) return;
         if (Request.IsAuthenticated) return;
         if (Request.HttpMethod != "GET") return;
         if (Request.QueryString.ToString() != string.Empty) return;
